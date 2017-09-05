@@ -1,4 +1,3 @@
-*.txt
 *.ipynb
 .ipynb_checkpoints/*
 *.pdf
