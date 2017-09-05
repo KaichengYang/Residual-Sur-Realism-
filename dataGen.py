@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import dataloader
 
+
 class DataGenerator(object):
     def __init__(self, predicted, residuals, r0, n, p, jstar, beta0):
         self.predicted = predicted
@@ -25,6 +26,9 @@ class DataGenerator(object):
                                              (self.n, self.p)))
         self.Pr0 = self.R0 * self.R0.T / (self.R0.T * self.R0)
 
+        self.X = None
+        self.Y = None
+
     def calculateAM(self, M):
         W = np.c_[np.matrix(np.ones(self.n)).T,
                   (np.matrix(np.identity(self.n)) - self.Pr0) * M]
@@ -38,7 +42,7 @@ class DataGenerator(object):
         sumbase = np.matrix(np.zeros(self.n)).T
         for j in range(1, self.p+1):
             if j != self.jstar:
-                sumbase = sumbase + self.beta[j-1][0, 0] * M[:,j-1]
+                sumbase = sumbase + self.beta[j-1][0, 0] * M[:, j-1]
 
         mj = (self.Y0 - np.matrix(np.ones(self.n)).T * self.beta0
               - Am * self.Z + self.Pr0 * M * self.beta - sumbase) / float(self.beta[self.jstar-1])
@@ -62,24 +66,29 @@ class DataGenerator(object):
         X = (np.matrix(np.identity(self.n)) - self.Pr0) * M
         epsilon = self.R0 + self.calculateAM(M) * self.Z
         Y = np.matrix(np.ones(self.n)).T * self.beta0 + X * self.beta + epsilon
-        return X.A, Y.A
+        self.X = X.A
+        self.Y = Y.A
+        return self.X, self.Y
+
+    def dumpData(self, file_name):
+        np.savetxt("./%s" % file_name, np.c_[self.Y, self.X])
 
 
 if __name__ == "__main__":
+    pass
     # bulls eye example
     #bulls_eye_predicted_data, bulls_eye_residuals = dataloader.calculateResidualsFromFile("./bullseye_Lin_4p_5_flat.txt")
     #dg = DataGenerator(bulls_eye_predicted_data, bulls_eye_residuals, 0.75, 600, 4, 4, 0)
 
     # gaussian example
-    #gaussian_predicted_data, gaussian_residuals = dataloader.calculateResidualsFromFile("./cfgauss_Lin_4p_5_flat.txt")
-    #print gaussian_residuals.shape[0]
+    gaussian_predicted_data, gaussian_residuals = dataloader.calculateResidualsFromFile("./cfgauss_Lin_4p_5_flat.txt")
+    print gaussian_residuals.shape[0]
     #dg = DataGenerator(gaussian_predicted_data, gaussian_residuals, 0.75, gaussian_residuals.shape[0], 4, 4, 0)
 
-
     # ads demo
-    ads_prediceted_data, ads_residuals = dataloader.calculateResidualsFromFile("./ads_demo_data.txt")
-    plt.scatter(ads_prediceted_data, ads_residuals)
-    plt.show()
+    #ads_prediceted_data, ads_residuals = dataloader.calculateResidualsFromFile("./ads_demo_data.txt")
+    #plt.scatter(ads_prediceted_data, ads_residuals)
+    #plt.show()
 
     #X, Y = dg.generateData()
     #y, r = dataloader.calculateResiduals(X, Y)
