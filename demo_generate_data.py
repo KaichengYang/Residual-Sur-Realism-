@@ -48,3 +48,27 @@ if __name__ == "__main__":
     # original picture
     plt.scatter(FA2017ADS_predicted_test, FA2017ADS_residuals, s=0.2)
     plt.show()
+
+    ################## ################## ##################
+    # Example 3: generate data set with "./SP2018ADS.png"
+    # open the image with PIL
+    SP2018ADS_image = Image.open('./SP2018ADS.png')
+    # initialize the ImageProcessor instance
+    SP2018ADS_image_processor = residuals.ImageProcessor(SP2018ADS_image)
+    # add frame
+    SP2018ADS_image_processor.addFrame()
+    # get the predicted and residuals
+    SP2018ADS_predicted, SP2018_residuals = SP2018ADS_image_processor.final_xs, SP2018ADS_image_processor.final_ys
+    # feed predicted and residuals to DataGenerator
+    SP2018ADS_dat_generator = residuals.DataGenerator(SP2018ADS_predicted, SP2018_residuals, 0.75, SP2018ADS_predicted.shape[0], 4, 4, 0)
+    # generate the features and target
+    SP2018ADS_dat_generator.generateData()
+    # save the data into file
+    # the first column is the target and the rest are features
+    SP2018ADS_dat_generator.dumpData("SP2018GeneratedData.txt")
+    # to test, apply linear regression again
+    SP2018ADS_predicted_test, SP2018ADS_residuals_test = residuals.calculateResidualsFromFile("./SP2018GeneratedData.txt")
+    # plot the residuals against predicted from the generated data shold see the
+    # original picture
+    plt.scatter(SP2018ADS_predicted_test, SP2018ADS_residuals_test, s=0.2)
+    plt.show()
