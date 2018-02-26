@@ -18,8 +18,8 @@ if __name__ == "__main__":
     # orthogonal
     ADS_image_processor.addFrame()
     # compare the inner product before and after adding the frame
-    print "Inner product of x-coordinates and y-coordinates before adding the frame :%.2E" % sum(ADS_image_processor.normalized_xs * ADS_image_processor.normalized_ys)
-    print "Inner product of x-coordinates and y-coordinates after adding the frame :%.2E" % sum(ADS_image_processor.final_xs * ADS_image_processor.final_ys)
+    print("Inner product of x-coordinates and y-coordinates before adding the frame :%.2E" % sum(ADS_image_processor.normalized_xs * ADS_image_processor.normalized_ys))
+    print("Inner product of x-coordinates and y-coordinates after adding the frame :%.2E" % sum(ADS_image_processor.final_xs * ADS_image_processor.final_ys))
     # plot the scatter graph of the processed data, a frame had been added to
     # the picture
     plt.scatter(ADS_image_processor.final_xs, ADS_image_processor.final_ys, s=0.2)
@@ -34,8 +34,8 @@ if __name__ == "__main__":
     # directly addFrame is also working
     FA2017ADS_image_processor.addFrame()
     # compare the inner product before and after adding the frame
-    print "Inner product of x-coordinates and y-coordinates before adding the frame :%.2E" % sum(FA2017ADS_image_processor.normalized_xs * FA2017ADS_image_processor.normalized_ys)
-    print "Inner product of x-coordinates and y-coordinates after adding the frame :%.2E" % sum(FA2017ADS_image_processor.final_xs * FA2017ADS_image_processor.final_ys)
+    print("Inner product of x-coordinates and y-coordinates before adding the frame :%.2E" % sum(FA2017ADS_image_processor.normalized_xs * FA2017ADS_image_processor.normalized_ys))
+    print("Inner product of x-coordinates and y-coordinates after adding the frame :%.2E" % sum(FA2017ADS_image_processor.final_xs * FA2017ADS_image_processor.final_ys))
     # plot the scatter graph of the processed data, a frame had been added to
     # the picture
     plt.scatter(FA2017ADS_image_processor.final_xs, FA2017ADS_image_processor.final_ys, s=0.2)

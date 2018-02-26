@@ -26,7 +26,7 @@ class ImageProcessor(object):
         self.image_array = np.asarray(self.gray_image).copy()
 
         if threshold < 0 or threshold > 255:
-            print "Invalid threshold, try again with 0 <= threshold <=255."
+            print("Invalid threshold, try again with 0 <= threshold <=255.")
         self.threshold = threshold
 
         self.image_xs = None
@@ -101,7 +101,7 @@ class ImageProcessor(object):
         while(interval > 1e-10):
             inner_product, _, _ = self.addFrameAccordingAlpha(alpha + interval)
             if verbose:
-                print inner_product, alpha, interval
+                print(inner_product, alpha, interval)
             if original_inner_product * inner_product < 0:
                 interval = interval / 2.
                 continue
@@ -194,7 +194,7 @@ class DataGenerator(object):
             M = M1
             M1 = self.iterateM(M)
             delta = max(((np.matrix(np.identity(self.n)) - self.Pr0) * (M1 - M)).A1)
-            print "Round %d, delta: %.2E" % (i, delta)
+            print("Round %d, delta: %.2E" % (i, delta))
             if delta < 1e-12:
                 break
         return M1
@@ -216,7 +216,7 @@ if __name__ == "__main__":
     pass
     # gaussian example
     #gaussian_predicted_data, gaussian_residuals = dataloader.calculateResidualsFromFile("./cfgauss_Lin_4p_5_flat.txt")
-    #print gaussian_residuals.shape[0]
+    #print(gaussian_residuals.shape[0])
     #dg = DataGenerator(gaussian_predicted_data, gaussian_residuals, 0.75, gaussian_residuals.shape[0], 4, 4, 0)
 
     # ads demo
