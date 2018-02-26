@@ -7,7 +7,7 @@ For more detailed information, follow the [link](http://www4.stat.ncsu.edu/~stef
 ## About the code
 
 There is an implementation in R on the web page mentioned just now.
-This repo contains a Python 2.7 implementation.
+This repo contains a Python 3 implementation.
 
 The implementation here is based on the original paper.
 
@@ -19,6 +19,6 @@ Dependencies:
 * numpy
 * sklearn
 * matplotlib
-* PIL
+* Pillow
 
 For a walkthrough of the code, see the `Walkthrough.ipynb` file.
